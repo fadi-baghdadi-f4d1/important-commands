@@ -1,0 +1,21 @@
+/////////// remove all dead containers 
+docker ps -a | grep 'Dead' | awk '{print $1}' | xargs docker rm
+
+
+docker ps -a | grep '2 weeks' | awk '{print $1}' | xargs docker rm
+
+///////// to get the project pid, you will get multiple id try them to see which one
+ps -ef | grep 'omni-core-api' | awk '{print $2}' 
+- or type:s
+jps
+
+//////// watch the heap using jcmd
+watch -n1 jcmd 177687 GC.heap_info
+
+- or you can just type the name of your application:
+
+watch -n1 jcmd OmniCoreApiApplication GC.heap_info
+
+
+//////// you can run garbage collector
+jcmd 273738 GC.runocke
